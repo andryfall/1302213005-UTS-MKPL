@@ -84,15 +84,7 @@ public class Employee {
 	}
 	
 	public int getAnnualIncomeTax() {
-		
-		LocalDate date = LocalDate.now();
-		
-		if (date.getYear() == yearJoined) {
-			monthWorkingInYear = date.getMonthValue() - monthJoined;
-		}else {
-			monthWorkingInYear = 12;
-		}
-		
-		return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
+		int monthsWorkedInYear = LocalDate.now().getYear() == joinDate.getYear() ? LocalDate.now().getMonthValue() - joinDate.getMonthValue() : 12;
+    	return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthsWorkedInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
 	}
 }
